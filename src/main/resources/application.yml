@@ -1,0 +1,10 @@
+spring:
+  jpa:
+    open-in-view: true
+  profiles:
+    active: dev
+
+springdoc:
+  swagger-ui:
+    disable-swagger-default-url: true
+    path: "/"
