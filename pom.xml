@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.ong</groupId>
 	<artifactId>vamos-ajudar</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>vamos-ajudar</name>
 	<description>Spring Boot API</description>
 	<properties>
