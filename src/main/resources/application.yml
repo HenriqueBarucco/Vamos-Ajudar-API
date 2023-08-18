@@ -1,10 +1,31 @@
 spring:
+  datasource:
+    password: ${DB_PASSWORD}
+    url: ${DB_URL}
+    username: ${DB_USER}
+    driver-class-name: org.mariadb.jdbc.Driver
   jpa:
     open-in-view: true
-  profiles:
-    active: dev
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    show-sql: true
+    database-platform: org.hibernate.dialect.MariaDB103Dialect
 
 springdoc:
   swagger-ui:
     disable-swagger-default-url: true
     path: "/"
+
+server:
+  error:
+    include-stacktrace: never
+
+API:
+  security:
+    token:
+      secret: ajudardev
