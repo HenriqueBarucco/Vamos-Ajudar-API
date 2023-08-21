@@ -8,7 +8,7 @@
 		<version>3.1.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.ong</groupId>
+	<groupId>com.got</groupId>
 	<artifactId>vamos-ajudar</artifactId>
 	<version>1.0.0</version>
 	<name>vamos-ajudar</name>

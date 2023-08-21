@@ -1,4 +1,4 @@
-package com.ong.vamosajudar.controllers.ong.dto;
+package com.got.vamosajudar.controllers.ong.dto;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.ong.vamosajudar.entities;
+package com.got.vamosajudar.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;

@@ -1,6 +1,6 @@
-package com.ong.vamosajudar.controllers.ong.dto;
+package com.got.vamosajudar.controllers.ong.dto;
 
-import com.ong.vamosajudar.entities.dao.Address;
+import com.got.vamosajudar.entities.dao.Address;
 import lombok.Data;
 
 @Data

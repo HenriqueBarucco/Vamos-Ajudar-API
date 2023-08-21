@@ -1,6 +1,6 @@
-package com.ong.vamosajudar.entities.dao;
+package com.got.vamosajudar.entities.dao;
 
-import com.ong.vamosajudar.controllers.ong.dto.AddressDto;
+import com.got.vamosajudar.controllers.ong.dto.AddressDto;
 
 public record Address(
         String street,

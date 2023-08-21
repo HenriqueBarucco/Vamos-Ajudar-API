@@ -1,9 +1,9 @@
-package com.ong.vamosajudar.entities;
+package com.got.vamosajudar.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.ong.vamosajudar.controllers.ong.dto.OngDto;
-import com.ong.vamosajudar.entities.dao.Address;
-import com.ong.vamosajudar.entities.dao.Contact;
+import com.got.vamosajudar.controllers.ong.dto.OngDto;
+import com.got.vamosajudar.entities.dao.Address;
+import com.got.vamosajudar.entities.dao.Contact;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;

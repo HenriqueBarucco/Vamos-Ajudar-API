@@ -1,8 +1,8 @@
-package com.ong.vamosajudar.services;
+package com.got.vamosajudar.services;
 
-import com.ong.vamosajudar.controllers.ong.dto.OngDto;
-import com.ong.vamosajudar.entities.Ong;
-import com.ong.vamosajudar.repositories.OngRepository;
+import com.got.vamosajudar.controllers.ong.dto.OngDto;
+import com.got.vamosajudar.entities.Ong;
+import com.got.vamosajudar.repositories.OngRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

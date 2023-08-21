@@ -1,8 +1,8 @@
-package com.ong.vamosajudar.controllers.ong;
+package com.got.vamosajudar.controllers.ong;
 
-import com.ong.vamosajudar.controllers.ong.dto.OngDto;
-import com.ong.vamosajudar.entities.Ong;
-import com.ong.vamosajudar.services.OngService;
+import com.got.vamosajudar.controllers.ong.dto.OngDto;
+import com.got.vamosajudar.entities.Ong;
+import com.got.vamosajudar.services.OngService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;

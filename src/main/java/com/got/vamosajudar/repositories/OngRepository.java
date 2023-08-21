@@ -1,6 +1,6 @@
-package com.ong.vamosajudar.repositories;
+package com.got.vamosajudar.repositories;
 
-import com.ong.vamosajudar.entities.Ong;
+import com.got.vamosajudar.entities.Ong;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

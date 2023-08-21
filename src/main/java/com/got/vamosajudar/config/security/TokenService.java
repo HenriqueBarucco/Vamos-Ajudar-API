@@ -1,10 +1,10 @@
-package com.ong.vamosajudar.config.security;
+package com.got.vamosajudar.config.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.ong.vamosajudar.entities.User;
+import com.got.vamosajudar.entities.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.ong.vamosajudar.config;
+package com.got.vamosajudar.config;
 
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
