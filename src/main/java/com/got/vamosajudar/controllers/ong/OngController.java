@@ -26,6 +26,13 @@ public class OngController {
         return ResponseEntity.ok().body(ongService.findAll());
     }
 
+    @Operation(summary = "ONG por nome.", description = "Retorna ONG cadastrada no banco de dados pelo nome.")
+    @GetMapping("{name}")
+    public ResponseEntity<Ong> getOng(@PathVariable String name) {
+        Ong ong = ongService.findByName(name);
+        return ResponseEntity.ok().body(ong);
+    }
+
     @Operation(summary = "Adicionar ONG.", description = "Adiciona uma nova ong ao banco de dados.")
     @PostMapping()
     public ResponseEntity<Ong> addOng(@RequestBody OngDto ongDto) {

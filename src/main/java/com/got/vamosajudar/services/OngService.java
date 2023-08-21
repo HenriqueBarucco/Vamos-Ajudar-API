@@ -23,4 +23,9 @@ public class OngService {
         // TODO VERIFICAR SE NÃO HÁ ONG COM MESMO NOME
         return ongRepository.save(ong);
     }
+
+    public Ong findByName(String name) {
+        // TODO ADICIONAR TRATATIVA
+        return ongRepository.findByNameIgnoreCase(name);
+    }
 }

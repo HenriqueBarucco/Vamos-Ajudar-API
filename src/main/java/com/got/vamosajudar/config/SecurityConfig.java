@@ -34,6 +34,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(SWAGGER).permitAll()
                         .requestMatchers("/login", "/v1/ong").permitAll()
+                        .requestMatchers("/v1/ong/**").permitAll()
                         .requestMatchers("/public/**").permitAll()
                         .requestMatchers("/**").authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
