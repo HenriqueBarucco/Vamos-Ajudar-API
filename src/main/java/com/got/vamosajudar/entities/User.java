@@ -1,5 +1,7 @@
 package com.got.vamosajudar.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.got.vamosajudar.entities.dao.UserRole;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,28 +24,37 @@ public class User implements UserDetails {
 
     private String login;
 
+    @JsonIgnore
     private String password;
 
     private String email;
 
     private String name;
 
+    @Enumerated(EnumType.STRING)
+    private UserRole userRole;
+
     @Lob
     private byte[] image;
 
     private Boolean active;
 
-    public User(String login, String password, String email, String name) {
+    public User(String login, String password, String email, String name,UserRole userRole) {
         this.login = login;
         this.password = password;
         this.email = email;
         this.name = name;
         this.active = true;
+        this.userRole = userRole;
     }
+
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        if(this.userRole == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"),
+                new SimpleGrantedAuthority("ROLE_USER"));
+        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     @Override
