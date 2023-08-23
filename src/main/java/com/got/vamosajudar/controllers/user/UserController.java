@@ -1,56 +1,43 @@
 package com.got.vamosajudar.controllers.user;
 
-import com.got.vamosajudar.config.security.TokenJWTDTO;
-import com.got.vamosajudar.config.security.TokenService;
+import com.got.vamosajudar.config.security.TokenJWT;
 import com.got.vamosajudar.controllers.user.dto.AuthDTO;
 import com.got.vamosajudar.controllers.user.dto.RegisterDTO;
-import com.got.vamosajudar.entities.User;
-import com.got.vamosajudar.repositories.UserRepository;
+import com.got.vamosajudar.controllers.user.dto.UserDto;
+import com.got.vamosajudar.services.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "Autenticação", description = "Operações relacionadas a autenticações.")
 @RestController
 @RequestMapping("v1/auth")
 public class UserController {
 
-
     @Autowired
-    private AuthenticationManager manager;
-
-    @Autowired
-    private TokenService tokenService;
-
-    @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
 
+    @Operation(summary = "Logar.", description = "Endpoint para fazer o login.")
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody @Valid AuthDTO dto){
-        var token = new UsernamePasswordAuthenticationToken(dto.login(),dto.password());
-        var authentication = manager.authenticate(token);
-        var jwtToken = tokenService.gerarToken((User) authentication.getPrincipal());
-
-        return ResponseEntity.ok(new TokenJWTDTO(jwtToken));
+    public ResponseEntity<TokenJWT> login(@RequestBody @Valid AuthDTO authDTO){
+        return ResponseEntity.ok().body(userService.login(authDTO));
     }
 
-
+    @Operation(summary = "Registrar.", description = "Endpoint para fazer o cadastro de uma nova conta.")
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody @Valid RegisterDTO dto){
-        if (this.userRepository.findByLogin(dto.login()) != null) return ResponseEntity.badRequest().build();
-        var senha = new BCryptPasswordEncoder().encode(dto.password());
-        var user = new User(dto.login(), senha, dto.email(), dto.name(),dto.role());
-        return ResponseEntity.ok().body(userRepository.save(user));
+    public ResponseEntity<UserDto> register(@RequestBody @Valid RegisterDTO registerDTO){
+        return ResponseEntity.ok().body(userService.register(registerDTO));
     }
 
-
-
-
+    @Operation(summary = "Perfil.", description = "Endpoint para visualizar o perfil.", security = @SecurityRequirement(name = "bearerAuth"))
+    @GetMapping("/perfil")
+    public ResponseEntity<String> perfil(){
+        return ResponseEntity.ok().body(SecurityContextHolder.getContext().getAuthentication().getName());
+    }
 }

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 //@SecurityRequirement(name = "bearerAuth")
-@Tag(name = "ONG's", description = "Operações de relacionadas as Ong's.")
+@Tag(name = "ONG's", description = "Operações relacionadas as Ong's.")
 @RestController
 @RequestMapping(path = "/v1/ong")
 public class OngController {

@@ -28,4 +28,5 @@ server:
 API:
   security:
     token:
-      secret: ajudardev
+      secret: 26dc88296acca1fcf780fb1e5928478a4538b766dedc247228568505f8773fd9
+      expiration: 8640000

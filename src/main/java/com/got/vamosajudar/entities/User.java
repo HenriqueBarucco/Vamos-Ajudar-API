@@ -1,6 +1,8 @@
 package com.got.vamosajudar.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.got.vamosajudar.controllers.user.dto.RegisterDTO;
+import com.got.vamosajudar.controllers.user.dto.UserDto;
 import com.got.vamosajudar.entities.dao.UserRole;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -39,16 +41,14 @@ public class User implements UserDetails {
 
     private Boolean active;
 
-    public User(String login, String password, String email, String name,UserRole userRole) {
-        this.login = login;
-        this.password = password;
-        this.email = email;
-        this.name = name;
+    public User(RegisterDTO registerDTO) {
+        this.login = registerDTO.login();
+        this.password = registerDTO.encryptedPassword();
+        this.email = registerDTO.email();
+        this.name = registerDTO.name();
         this.active = true;
-        this.userRole = userRole;
+        this.userRole = UserRole.USER;
     }
-
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -85,5 +85,9 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public UserDto toDto() {
+        return new UserDto(this);
     }
 }

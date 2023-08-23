@@ -1,19 +1,21 @@
 package com.got.vamosajudar.controllers.user.dto;
 
-import com.got.vamosajudar.entities.dao.UserRole;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public record RegisterDTO(
-
         @NotBlank
         String login,
         @Email
-        String email
-        ,
+        String email,
         @NotBlank
         String password,
-        String name,
-        UserRole role
+        @NotBlank
+        String name
 ) {
+        public String encryptedPassword() {
+                BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+                return encoder.encode(this.password);
+        }
 }
