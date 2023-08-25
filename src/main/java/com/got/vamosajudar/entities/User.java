@@ -41,6 +41,9 @@ public class User implements UserDetails {
 
     private Boolean active;
 
+    @OneToOne()
+    private Ong ong;
+
     public User(RegisterDTO registerDTO) {
         this.login = registerDTO.login();
         this.password = registerDTO.encryptedPassword();

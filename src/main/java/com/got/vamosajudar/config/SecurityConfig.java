@@ -34,7 +34,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(SWAGGER).permitAll()
                         .requestMatchers(HttpMethod.POST, "/v1/auth/**").permitAll()
-                        .requestMatchers("/v1/ong/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/v1/ong/**").permitAll()
                         .requestMatchers("/public/**").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement((session) -> session
