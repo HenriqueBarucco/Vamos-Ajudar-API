@@ -1,0 +1,31 @@
+name: Build Project
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build and Package
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v3
+
+      - name: Configurar JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'corretto'
+          java-version: '20'
+
+      - name: Build com Maven
+        run: mvn package -B
+
+      - name: Arquivar Build
+        uses: actions/upload-artifact@v3
+        with:
+          name: vamos-ajudar-api
+          path: target/*.jar
+

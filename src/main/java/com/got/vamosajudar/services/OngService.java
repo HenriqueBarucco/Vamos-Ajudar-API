@@ -73,4 +73,8 @@ public class OngService {
         userRepository.save(user);
         ongRepository.save(ong);
     }
+
+    public Ong findRandom() {
+        return ongRepository.findRandom();
+    }
 }

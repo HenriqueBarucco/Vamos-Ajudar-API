@@ -46,4 +46,11 @@ public class OngController {
         ongService.delete();
         return ResponseEntity.noContent().build();
     }
+
+    @Operation(summary = "ONG aleatória.", description = "Returna uma ong aleatoriamente do banco de dados.")
+    @GetMapping("/random")
+    public ResponseEntity<Ong> randomOng() {
+        Ong ong = ongService.findRandom();
+        return ResponseEntity.ok().body(ong);
+    }
 }
