@@ -7,6 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class VamosAjudarApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(.class, args);
+		SpringApplication.run(VamosAjudarApplication.class, args);
 	}
 }
