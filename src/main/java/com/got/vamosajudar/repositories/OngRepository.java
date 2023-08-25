@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface OngRepository  extends JpaRepository<Ong, String> {
 
     Ong findByNameIgnoreCase(String name);
+
+    Boolean existByName(String name);
 }

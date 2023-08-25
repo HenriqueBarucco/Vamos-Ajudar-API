@@ -19,9 +19,10 @@ public class OngService {
     }
 
     public Ong create(OngDto ongDto) {
-        Ong ong = new Ong(ongDto);
-        // TODO VERIFICAR SE NÃO HÁ ONG COM MESMO NOME
-        return ongRepository.save(ong);
+        if (ongRepository.existByName(ongDto.getName())) {
+            throw new RuntimeException("Ong já existente.");
+        }
+        return ongRepository.save(new Ong(ongDto));
     }
 
     public Ong findByName(String name) {
