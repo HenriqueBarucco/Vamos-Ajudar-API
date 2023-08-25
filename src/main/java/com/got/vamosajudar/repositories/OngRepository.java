@@ -9,5 +9,5 @@ public interface OngRepository  extends JpaRepository<Ong, String> {
 
     Ong findByNameIgnoreCase(String name);
 
-    Boolean existByName(String name);
+    Boolean existsByName(String name);
 }

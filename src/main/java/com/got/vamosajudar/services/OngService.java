@@ -19,7 +19,7 @@ public class OngService {
     }
 
     public Ong create(OngDto ongDto) {
-        if (ongRepository.existByName(ongDto.getName())) {
+        if (ongRepository.existsByName(ongDto.getName())) {
             throw new RuntimeException("Ong já existente.");
         }
         return ongRepository.save(new Ong(ongDto));
