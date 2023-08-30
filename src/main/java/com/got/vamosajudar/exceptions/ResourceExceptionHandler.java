@@ -3,6 +3,7 @@ package com.got.vamosajudar.exceptions;
 import com.got.vamosajudar.exceptions.exceptions.LoginException;
 import com.got.vamosajudar.exceptions.exceptions.ResourceExistException;
 import com.got.vamosajudar.exceptions.exceptions.ResourceNotFoundException;
+import io.jsonwebtoken.MalformedJwtException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.data.mapping.PropertyReferenceException;
 import org.springframework.http.HttpStatus;
