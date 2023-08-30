@@ -1,5 +1,6 @@
 package com.got.vamosajudar.config.security;
 
+import com.got.vamosajudar.exceptions.exceptions.LoginException;
 import com.got.vamosajudar.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -9,7 +10,6 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -39,7 +39,7 @@ public class ContextConfig {
     @Bean
     public UserDetailsService UserDetailsService() {
         return username -> userRepository.findByLogin(username).orElseThrow(
-                () -> new UsernameNotFoundException("Login ou senha incorretos.")
+                () -> new LoginException("Login ou senha incorretos.")
         );
     }
 }

@@ -3,6 +3,8 @@ package com.got.vamosajudar.services;
 import com.got.vamosajudar.controllers.ong.dto.OngDto;
 import com.got.vamosajudar.entities.Ong;
 import com.got.vamosajudar.entities.User;
+import com.got.vamosajudar.exceptions.exceptions.ResourceExistException;
+import com.got.vamosajudar.exceptions.exceptions.ResourceNotFoundException;
 import com.got.vamosajudar.repositories.OngRepository;
 import com.got.vamosajudar.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,15 +31,13 @@ public class OngService {
 
     public Ong create(OngDto ongDto) {
         if (ongRepository.existsByNameAndActiveTrue(ongDto.getName())) {
-            // TODO Exceção personalizada
-            throw new RuntimeException("Ong já existente.");
+            throw new ResourceExistException("Ong já existente.");
         }
 
         User user = userRepository.findByLogin(SecurityContextHolder.getContext().getAuthentication().getName()).get();
 
         if (user.getOng() != null) {
-            // TODO Exceção personalizada
-            throw new RuntimeException("Usuário já possui uma ONG.");
+            throw new ResourceExistException("Usuário já possui uma ONG.");
         }
 
         Ong ong = ongRepository.save(new Ong(ongDto));
@@ -49,16 +49,20 @@ public class OngService {
     }
 
     public Ong findByName(String name) {
-        // TODO ADICIONAR TRATATIVA
-        return ongRepository.findByNameIgnoreCaseAndActiveTrue(name);
+        Ong ong = ongRepository.findByNameIgnoreCaseAndActiveTrue(name);
+
+        if (ong == null) {
+            throw new ResourceNotFoundException("Ong não encontrada.");
+        }
+
+        return ong;
     }
 
     public void delete() {
         User user = userRepository.findByLogin(SecurityContextHolder.getContext().getAuthentication().getName()).get();
 
         if (user.getOng() == null) {
-            // TODO ADICIONAR TRATATIVA
-            throw new RuntimeException("Usuário não possui uma ONG.");
+            throw new ResourceNotFoundException("Usuário não possui uma ONG.");
         }
 
         deleteUserOng(user);

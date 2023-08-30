@@ -6,6 +6,7 @@ import com.got.vamosajudar.controllers.user.dto.AuthDTO;
 import com.got.vamosajudar.controllers.user.dto.RegisterDTO;
 import com.got.vamosajudar.controllers.user.dto.UserDto;
 import com.got.vamosajudar.entities.User;
+import com.got.vamosajudar.exceptions.exceptions.ResourceExistException;
 import com.got.vamosajudar.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,8 +31,7 @@ public class UserService {
 
     public UserDto register(RegisterDTO registerDTO) {
         if (userRepository.findByLogin(registerDTO.login()).isPresent()) {
-            // TODO FAZER AS EXCEPTIONS CUSTOMIZADAS
-            throw new RuntimeException("Usuário já cadastrado");
+            throw new ResourceExistException("Usuário já cadastrado.");
         }
 
         return userRepository.save(new User(registerDTO)).toDto();
