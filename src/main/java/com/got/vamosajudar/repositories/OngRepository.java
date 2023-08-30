@@ -1,6 +1,8 @@
 package com.got.vamosajudar.repositories;
 
 import com.got.vamosajudar.entities.Ong;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -14,7 +16,7 @@ public interface OngRepository  extends JpaRepository<Ong, String> {
 
     Boolean existsByNameAndActiveTrue(String name);
 
-    List<Ong> findByActiveTrue();
+    Page<List<Ong>> findByActiveTrue(Pageable pageable);
 
     @Query(value = "SELECT o FROM Ong o ORDER BY FUNCTION('RAND') FETCH FIRST 1 ROW ONLY")
     Ong findRandom();

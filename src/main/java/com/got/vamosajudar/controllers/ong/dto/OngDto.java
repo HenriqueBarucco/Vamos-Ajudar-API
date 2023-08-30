@@ -9,4 +9,5 @@ public class OngDto {
     private String goal;
     private AddressDto address;
     private ContactDto contact;
+    private String image;
 }

@@ -6,6 +6,8 @@ import com.got.vamosajudar.entities.User;
 import com.got.vamosajudar.repositories.OngRepository;
 import com.got.vamosajudar.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +23,8 @@ public class OngService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<Ong> findAll() {
-        return ongRepository.findByActiveTrue();
+    public Page<List<Ong>> findAll(Pageable pageable) {
+        return ongRepository.findByActiveTrue(pageable);
     }
 
     public Ong create(OngDto ongDto) {
