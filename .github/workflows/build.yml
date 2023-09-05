@@ -36,5 +36,5 @@ jobs:
           --data-raw '{
             "token": "${{ secrets.API_TOKEN }}",
             "phone": "${{ secrets.PHONE_ID }}",
-            "message": "Deploy em produção de ${{ env.GITHUB_REPOSITORY }} realizado com sucesso!"
+            "message": "Deploy em produção de Vamos-Ajudar-API realizado com sucesso!"
           }'
