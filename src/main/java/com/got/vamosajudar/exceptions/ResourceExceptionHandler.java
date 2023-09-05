@@ -1,6 +1,7 @@
 package com.got.vamosajudar.exceptions;
 
 import com.got.vamosajudar.exceptions.exceptions.LoginException;
+import com.got.vamosajudar.exceptions.exceptions.RequestException;
 import com.got.vamosajudar.exceptions.exceptions.ResourceExistException;
 import com.got.vamosajudar.exceptions.exceptions.ResourceNotFoundException;
 import io.jsonwebtoken.MalformedJwtException;
@@ -49,6 +50,15 @@ public class ResourceExceptionHandler {
     @ExceptionHandler(PropertyReferenceException.class)
     public ResponseEntity<StandardError> pageableInvalid(PropertyReferenceException e, HttpServletRequest request) {
         String error = "Argumento da paginação inválido";
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(),
+                request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(RequestException.class)
+    public ResponseEntity<StandardError> requestError(RequestException e, HttpServletRequest request) {
+        String error = "Erro em requisição de API externa.";
         HttpStatus status = HttpStatus.BAD_REQUEST;
         StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(),
                 request.getRequestURI());

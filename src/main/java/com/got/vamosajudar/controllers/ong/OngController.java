@@ -1,5 +1,6 @@
 package com.got.vamosajudar.controllers.ong;
 
+import com.got.vamosajudar.controllers.ong.dto.DonateDto;
 import com.got.vamosajudar.controllers.ong.dto.OngDto;
 import com.got.vamosajudar.entities.Ong;
 import com.got.vamosajudar.services.OngService;
@@ -55,5 +56,11 @@ public class OngController {
     public ResponseEntity<Ong> randomOng() {
         Ong ong = ongService.findRandom();
         return ResponseEntity.ok().body(ong);
+    }
+
+    @Operation(summary = "PIX para ONG por ID.", description = "Returna Qrcode e Brcode para realizar um PIX para a ong.")
+    @GetMapping("/donate/{id}")
+    public ResponseEntity<DonateDto> donateOng(@PathVariable String id) {
+        return ResponseEntity.ok().body(ongService.donate(id));
     }
 }

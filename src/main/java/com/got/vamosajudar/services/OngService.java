@@ -1,7 +1,9 @@
 package com.got.vamosajudar.services;
 
+import com.got.vamosajudar.controllers.ong.dto.DonateDto;
 import com.got.vamosajudar.controllers.ong.dto.OngDto;
 import com.got.vamosajudar.entities.Ong;
+import com.got.vamosajudar.entities.Pix;
 import com.got.vamosajudar.entities.User;
 import com.got.vamosajudar.exceptions.exceptions.ResourceExistException;
 import com.got.vamosajudar.exceptions.exceptions.ResourceNotFoundException;
@@ -15,9 +17,13 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OngService {
+
+    @Autowired
+    private PixService pixService;
 
     @Autowired
     private OngRepository ongRepository;
@@ -82,5 +88,17 @@ public class OngService {
 
     public Ong findRandom() {
         return ongRepository.findRandom();
+    }
+
+    public DonateDto donate(String id) {
+        Optional<Ong> ong = ongRepository.findById(id);
+
+        if (ong.isEmpty()) {
+            throw new ResourceNotFoundException("Ong não encontrada.");
+        }
+
+        Pix pix = pixService.getPix(ong.get());
+
+        return pix.toDonate();
     }
 }

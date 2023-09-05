@@ -33,6 +33,8 @@ public class Ong {
 
     private String image;
 
+    private String chavePix;
+
     private boolean verified;
 
     private boolean active;
