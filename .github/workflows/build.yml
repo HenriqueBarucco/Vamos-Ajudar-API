@@ -29,9 +29,12 @@ jobs:
           name: vamos-ajudar-api
           path: target/*.jar
 
-      - name: Mensagem de Sucesso no WhatsAPp
+      - name: Mensagem de Sucesso no WhatsApp
         run: |
           curl --location --request POST 'https://easy-whatsapp-api.henriquebarucco.com.br/message/text' \
-          --form 'token="${{ secrets.API_TOKEN }}"' \
-          --form 'phone="${{ secrets.PHONE_ID }}"' \
-          --form 'message="Deploy em produção de ${{ env.GITHUB_REPOSITORY }} realizado com sucesso!"' \
+          --header 'Content-Type: application/json' \
+          --data-raw '{
+            "token": "${{ secrets.API_TOKEN }}",
+            "phone": "${{ secrets.PHONE_ID }}",
+            "message": "Deploy em produção de ${{ env.GITHUB_REPOSITORY }} realizado com sucesso!"
+          }'
