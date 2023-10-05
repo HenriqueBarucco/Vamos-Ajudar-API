@@ -7,6 +7,7 @@ import com.got.vamosajudar.services.OngService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -40,7 +41,7 @@ public class OngController {
 
     @Operation(summary = "Adicionar ONG.", description = "Adiciona uma nova ong ao banco de dados.", security = @SecurityRequirement(name = "bearerAuth"))
     @PostMapping()
-    public ResponseEntity<Ong> addOng(@RequestBody OngDto ongDto) {
+    public ResponseEntity<Ong> addOng(@RequestBody @Valid OngDto ongDto) {
         return ResponseEntity.ok().body(ongService.create(ongDto));
     }
 

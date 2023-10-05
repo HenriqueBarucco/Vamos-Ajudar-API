@@ -58,5 +58,6 @@ public class Ong {
         this.verified = false;
         this.active = true;
         this.createdAt = LocalDateTime.now();
+        this.chavePix = ongDto.getPix();
     }
 }
