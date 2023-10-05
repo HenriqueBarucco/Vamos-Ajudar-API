@@ -1,16 +1,18 @@
 package com.got.vamosajudar.services;
 
 import com.got.vamosajudar.config.security.JwtService;
-import com.got.vamosajudar.config.security.TokenJWT;
 import com.got.vamosajudar.controllers.user.dto.AuthDTO;
 import com.got.vamosajudar.controllers.user.dto.RegisterDTO;
 import com.got.vamosajudar.controllers.user.dto.UserDto;
+import com.got.vamosajudar.controllers.user.dto.UserTokenDto;
 import com.got.vamosajudar.entities.User;
 import com.got.vamosajudar.exceptions.exceptions.ResourceExistException;
 import com.got.vamosajudar.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
@@ -37,11 +39,18 @@ public class UserService {
         return userRepository.save(new User(registerDTO)).toDto();
     }
 
-    public TokenJWT login(AuthDTO authDTO) {
+    public UserTokenDto login(AuthDTO authDTO) {
         authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(authDTO.login(), authDTO.password())
         );
-        var user = userDetailsService.loadUserByUsername(authDTO.login());
-        return new TokenJWT(jwtService.generateToken(user));
+        UserDetails userDetails = userDetailsService.loadUserByUsername(authDTO.login());
+
+        return new UserTokenDto(userRepository.findByLogin(userDetails.getUsername()).get(), jwtService.generateToken(userDetails));
+    }
+
+    public UserDto perfil() {
+        User user = userRepository.findByLogin(SecurityContextHolder.getContext().getAuthentication().getName()).get();
+
+        return user.toDto();
     }
 }

@@ -11,6 +11,9 @@ public class UserDto {
     private String login;
     private UserRole userRole;
 
+    public UserDto() {
+    }
+
     public UserDto(User user) {
         this.name = user.getName();
         this.email = user.getEmail();
