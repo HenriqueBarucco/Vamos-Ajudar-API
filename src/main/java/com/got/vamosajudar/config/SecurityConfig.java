@@ -35,6 +35,7 @@ public class SecurityConfig {
                         .requestMatchers(SWAGGER).permitAll()
                         .requestMatchers(HttpMethod.POST, "/v1/auth/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/v1/ong/**").permitAll()
+                        .requestMatchers( "/actuator/**").permitAll()
                         .requestMatchers("/public/**").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement((session) -> session
