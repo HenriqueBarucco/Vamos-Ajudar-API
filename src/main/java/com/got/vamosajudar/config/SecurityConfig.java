@@ -37,6 +37,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/v1/ong/**").permitAll()
                         .requestMatchers( "/actuator/**").permitAll()
                         .requestMatchers("/public/**").permitAll()
+                        .requestMatchers("/v1/image/**").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

@@ -36,8 +36,7 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
-    @Lob
-    private byte[] image;
+    private String image;
 
     private Boolean active;
 

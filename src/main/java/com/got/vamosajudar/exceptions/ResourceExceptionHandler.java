@@ -1,9 +1,6 @@
 package com.got.vamosajudar.exceptions;
 
-import com.got.vamosajudar.exceptions.exceptions.LoginException;
-import com.got.vamosajudar.exceptions.exceptions.RequestException;
-import com.got.vamosajudar.exceptions.exceptions.ResourceExistException;
-import com.got.vamosajudar.exceptions.exceptions.ResourceNotFoundException;
+import com.got.vamosajudar.exceptions.exceptions.*;
 import io.jsonwebtoken.MalformedJwtException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.data.mapping.PropertyReferenceException;
@@ -60,6 +57,15 @@ public class ResourceExceptionHandler {
     public ResponseEntity<StandardError> requestError(RequestException e, HttpServletRequest request) {
         String error = "Erro em requisição de API externa.";
         HttpStatus status = HttpStatus.BAD_REQUEST;
+        StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(),
+                request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(ImageException.class)
+    public ResponseEntity<StandardError> imageError(ImageException e, HttpServletRequest request) {
+        String error = "Erro com a imagem.";
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
         StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(),
                 request.getRequestURI());
         return ResponseEntity.status(status).body(err);

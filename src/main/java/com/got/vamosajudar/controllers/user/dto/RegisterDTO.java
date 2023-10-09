@@ -12,7 +12,9 @@ public record RegisterDTO(
         @NotBlank
         String password,
         @NotBlank
-        String name
+        String name,
+
+        String image
 ) {
         public String encryptedPassword() {
                 BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();

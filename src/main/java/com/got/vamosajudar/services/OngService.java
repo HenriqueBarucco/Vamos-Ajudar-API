@@ -26,6 +26,9 @@ public class OngService {
     private PixService pixService;
 
     @Autowired
+    private ImageService imageService;
+
+    @Autowired
     private OngRepository ongRepository;
 
     @Autowired
@@ -46,7 +49,12 @@ public class OngService {
             throw new ResourceExistException("Usuário já possui uma ONG.");
         }
 
-        Ong ong = ongRepository.save(new Ong(ongDto));
+        Ong ong = new Ong(ongDto);
+
+        byte[] image = imageService.base64ToImage(ongDto.getImage());
+        ong.setImage(imageService.saveImage(image, "jpeg"));
+
+        ongRepository.save(ong);
 
         user.setOng(ong);
         userRepository.save(user);

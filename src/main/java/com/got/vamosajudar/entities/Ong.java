@@ -54,7 +54,6 @@ public class Ong {
         this.goal = ongDto.getGoal();
         this.address = new Address(ongDto.getAddress());
         this.contact = new Contact(ongDto.getContact());
-        this.image = ongDto.getImage();
         this.verified = false;
         this.active = true;
         this.createdAt = LocalDateTime.now();
