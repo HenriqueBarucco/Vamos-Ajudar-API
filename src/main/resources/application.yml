@@ -24,6 +24,7 @@ springdoc:
 server:
   error:
     include-stacktrace: never
+  max-http-header-size: 50MB
 
 API:
   security:
