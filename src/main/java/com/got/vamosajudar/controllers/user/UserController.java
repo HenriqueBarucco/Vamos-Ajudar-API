@@ -30,7 +30,7 @@ public class UserController {
 
     @Operation(summary = "Registrar.", description = "Endpoint para fazer o cadastro de uma nova conta.")
     @PostMapping("/register")
-    public ResponseEntity<UserDto> register(@RequestBody @Valid RegisterDTO registerDTO){
+    public ResponseEntity<UserTokenDto> register(@RequestBody @Valid RegisterDTO registerDTO){
         return ResponseEntity.ok().body(userService.register(registerDTO));
     }
 

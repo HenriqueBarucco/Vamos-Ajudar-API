@@ -34,7 +34,7 @@ public class UserService {
     @Autowired
     private UserDetailsService userDetailsService;
 
-    public UserDto register(RegisterDTO registerDTO) {
+    public UserTokenDto register(RegisterDTO registerDTO) {
         if (userRepository.findByLogin(registerDTO.login()).isPresent()) {
             throw new ResourceExistException("Usuário já cadastrado.");
         }
@@ -44,7 +44,9 @@ public class UserService {
         byte[] image = imageService.base64ToImage(registerDTO.image());
         user.setImage(imageService.saveImage(image, "jpeg"));
 
-        return userRepository.save(user).toDto();
+        userRepository.save(user);
+
+        return new UserTokenDto(user, jwtService.generateToken(user));
     }
 
     public UserTokenDto login(AuthDTO authDTO) {

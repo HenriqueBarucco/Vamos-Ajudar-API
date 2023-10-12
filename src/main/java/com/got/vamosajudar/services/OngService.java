@@ -1,7 +1,7 @@
 package com.got.vamosajudar.services;
 
 import com.got.vamosajudar.controllers.ong.dto.DonateDto;
-import com.got.vamosajudar.controllers.ong.dto.OngDto;
+import com.got.vamosajudar.controllers.ong.dto.RequestOngDto;
 import com.got.vamosajudar.entities.Ong;
 import com.got.vamosajudar.entities.Pix;
 import com.got.vamosajudar.entities.User;
@@ -38,8 +38,8 @@ public class OngService {
         return ongRepository.findByActiveTrue(pageable);
     }
 
-    public Ong create(OngDto ongDto) {
-        if (ongRepository.existsByNameAndActiveTrue(ongDto.getName())) {
+    public Ong create(RequestOngDto requestOngDto) {
+        if (ongRepository.existsByNameAndActiveTrue(requestOngDto.getName())) {
             throw new ResourceExistException("Ong já existente.");
         }
 
@@ -49,9 +49,9 @@ public class OngService {
             throw new ResourceExistException("Usuário já possui uma ONG.");
         }
 
-        Ong ong = new Ong(ongDto);
+        Ong ong = new Ong(requestOngDto);
 
-        byte[] image = imageService.base64ToImage(ongDto.getImage());
+        byte[] image = imageService.base64ToImage(requestOngDto.getImage());
         ong.setImage(imageService.saveImage(image, "jpeg"));
 
         ongRepository.save(ong);

@@ -1,7 +1,7 @@
 package com.got.vamosajudar.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.got.vamosajudar.controllers.ong.dto.OngDto;
+import com.got.vamosajudar.controllers.ong.dto.RequestOngDto;
 import com.got.vamosajudar.entities.dao.Address;
 import com.got.vamosajudar.entities.dao.Contact;
 import jakarta.persistence.*;
@@ -48,15 +48,15 @@ public class Ong {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:MM:ss")
     private LocalDateTime createdAt;
 
-    public Ong(OngDto ongDto) {
-        this.name = ongDto.getName();
-        this.description = ongDto.getDescription();
-        this.goal = ongDto.getGoal();
-        this.address = new Address(ongDto.getAddress());
-        this.contact = new Contact(ongDto.getContact());
+    public Ong(RequestOngDto requestOngDto) {
+        this.name = requestOngDto.getName();
+        this.description = requestOngDto.getDescription();
+        this.goal = requestOngDto.getGoal();
+        this.address = new Address(requestOngDto.getAddress());
+        this.contact = new Contact(requestOngDto.getContact());
         this.verified = false;
         this.active = true;
         this.createdAt = LocalDateTime.now();
-        this.chavePix = ongDto.getPix();
+        this.chavePix = requestOngDto.getPix();
     }
 }

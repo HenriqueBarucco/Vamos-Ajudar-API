@@ -1,7 +1,7 @@
 package com.got.vamosajudar.controllers.ong;
 
 import com.got.vamosajudar.controllers.ong.dto.DonateDto;
-import com.got.vamosajudar.controllers.ong.dto.OngDto;
+import com.got.vamosajudar.controllers.ong.dto.RequestOngDto;
 import com.got.vamosajudar.entities.Ong;
 import com.got.vamosajudar.services.OngService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -41,8 +41,8 @@ public class OngController {
 
     @Operation(summary = "Adicionar ONG.", description = "Adiciona uma nova ong ao banco de dados.", security = @SecurityRequirement(name = "bearerAuth"))
     @PostMapping()
-    public ResponseEntity<Ong> addOng(@RequestBody @Valid OngDto ongDto) {
-        return ResponseEntity.ok().body(ongService.create(ongDto));
+    public ResponseEntity<Ong> addOng(@RequestBody @Valid RequestOngDto requestOngDto) {
+        return ResponseEntity.ok().body(ongService.create(requestOngDto));
     }
 
     @Operation(summary = "Deletar ONG.", description = "Deleta a ong associada ao usuário do banco de dados.", security = @SecurityRequirement(name = "bearerAuth"))
