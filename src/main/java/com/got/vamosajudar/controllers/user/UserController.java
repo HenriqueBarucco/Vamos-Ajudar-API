@@ -31,7 +31,7 @@ public class UserController {
         return ResponseEntity.ok().body(userService.register(registerDTO));
     }
 
-    @Operation(summary = "Perfil.", description = "Endpoint para visualizar o perfil.", security = @SecurityRequirement(name = "bearerAuth"), deprecated = true)
+    @Operation(summary = "Perfil.", description = "Endpoint para visualizar o perfil.", security = @SecurityRequirement(name = "bearerAuth"))
     @GetMapping("/perfil")
     public ResponseEntity<UserOngDto> perfil(){
         return ResponseEntity.ok().body(userService.perfil());
