@@ -1,10 +1,7 @@
 package com.got.vamosajudar.services;
 
 import com.got.vamosajudar.config.security.JwtService;
-import com.got.vamosajudar.controllers.user.dto.AuthDTO;
-import com.got.vamosajudar.controllers.user.dto.RegisterDTO;
-import com.got.vamosajudar.controllers.user.dto.UserDto;
-import com.got.vamosajudar.controllers.user.dto.UserTokenDto;
+import com.got.vamosajudar.controllers.user.dto.*;
 import com.got.vamosajudar.entities.User;
 import com.got.vamosajudar.exceptions.exceptions.ResourceExistException;
 import com.got.vamosajudar.repositories.UserRepository;
@@ -58,9 +55,8 @@ public class UserService {
         return new UserTokenDto(userRepository.findByLogin(userDetails.getUsername()).get(), jwtService.generateToken(userDetails));
     }
 
-    public UserDto perfil() {
+    public UserOngDto perfil() {
         User user = userRepository.findByLogin(SecurityContextHolder.getContext().getAuthentication().getName()).get();
-
-        return user.toDto();
+        return new UserOngDto(user);
     }
 }

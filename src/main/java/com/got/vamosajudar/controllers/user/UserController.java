@@ -1,9 +1,6 @@
 package com.got.vamosajudar.controllers.user;
 
-import com.got.vamosajudar.controllers.user.dto.AuthDTO;
-import com.got.vamosajudar.controllers.user.dto.RegisterDTO;
-import com.got.vamosajudar.controllers.user.dto.UserDto;
-import com.got.vamosajudar.controllers.user.dto.UserTokenDto;
+import com.got.vamosajudar.controllers.user.dto.*;
 import com.got.vamosajudar.services.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -36,7 +33,7 @@ public class UserController {
 
     @Operation(summary = "Perfil.", description = "Endpoint para visualizar o perfil.", security = @SecurityRequirement(name = "bearerAuth"), deprecated = true)
     @GetMapping("/perfil")
-    public ResponseEntity<UserDto> perfil(){
+    public ResponseEntity<UserOngDto> perfil(){
         return ResponseEntity.ok().body(userService.perfil());
     }
 }
