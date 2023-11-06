@@ -10,6 +10,8 @@ import com.got.vamosajudar.exceptions.exceptions.ResourceNotFoundException;
 import com.got.vamosajudar.repositories.OngRepository;
 import com.got.vamosajudar.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -34,10 +36,12 @@ public class OngService {
     @Autowired
     private UserRepository userRepository;
 
+    @Cacheable(value = "ongs")
     public Page<List<Ong>> findAll(Pageable pageable) {
         return ongRepository.findByActiveTrue(pageable);
     }
 
+    @CacheEvict(value = "ongs", allEntries = true)
     public Ong create(RequestOngDto requestOngDto) {
         if (ongRepository.existsByNameAndActiveTrue(requestOngDto.getName())) {
             throw new ResourceExistException("Ong já existente.");
@@ -62,6 +66,7 @@ public class OngService {
         return ong;
     }
 
+    @Cacheable(value = "ongs", key = "#name")
     public Ong findByName(String name) {
         Ong ong = ongRepository.findByNameIgnoreCaseAndActiveTrue(name);
 
@@ -72,6 +77,7 @@ public class OngService {
         return ong;
     }
 
+    @CacheEvict(value = "ongs", allEntries = true)
     public void delete() {
         User user = userRepository.findByLogin(SecurityContextHolder.getContext().getAuthentication().getName()).get();
 
@@ -82,6 +88,7 @@ public class OngService {
         deleteUserOng(user);
     }
 
+    @CacheEvict(value = "ongs", allEntries = true)
     private void deleteUserOng(User user) {
         Ong ong = user.getOng();
 
