@@ -8,13 +8,14 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "ongs_tbl")
 @Data
 @NoArgsConstructor
-public class Ong {
+public class Ong implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
