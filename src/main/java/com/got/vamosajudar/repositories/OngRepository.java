@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface OngRepository  extends JpaRepository<Ong, String> {
+public interface OngRepository extends JpaRepository<Ong, String> {
 
     Ong findByNameIgnoreCaseAndActiveTrue(String name);
 
